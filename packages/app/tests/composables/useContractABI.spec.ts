@@ -4,7 +4,7 @@ import { describe, expect, it, type SpyInstance, vi } from "vitest";
 
 import { $fetch } from "ohmyfetch";
 
-import { TESTNET_BETA_NETWORK, TESTNET_NETWORK } from "../mocks";
+import { GOERLI_BETA_NETWORK, GOERLI_NETWORK } from "../mocks";
 
 import useContractABI from "@/composables/useContractABI";
 
@@ -84,11 +84,11 @@ describe("useContractABI:", () => {
   });
   it("does not reuse cache if network changed", async () => {
     const mock = ($fetch as unknown as SpyInstance).mockClear();
-    const currentNetwork = ref(TESTNET_NETWORK);
+    const currentNetwork = ref(GOERLI_NETWORK);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { getCollection } = useContractABI({ currentNetwork } as any);
     await getCollection(["0x1230000000000000000000000000000000000000"]);
-    currentNetwork.value = TESTNET_BETA_NETWORK;
+    currentNetwork.value = GOERLI_BETA_NETWORK;
     await getCollection(["0x1230000000000000000000000000000000000000"]);
     expect(mock).toBeCalledTimes(2);
     mock.mockRestore();

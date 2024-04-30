@@ -13,23 +13,23 @@ import { stringTransformer } from "../transformers/string.transformer";
 @Index(["from", "isL1Originated", "l1BatchNumber", "nonce"])
 export class Transaction extends CountableEntity {
   @PrimaryColumn({ type: "bytea", transformer: hexTransformer })
-  public readonly hash: string;
+  public hash: string;
 
   @Index()
   @Column({ generated: true, type: "bigint" })
   public override readonly number: number;
 
   @Column({ type: "bytea", transformer: hexTransformer })
-  public readonly to: string;
+  public to: string;
 
   @Column({ type: "bytea", transformer: hexTransformer })
-  public readonly from: string;
+  public from: string;
 
   @Column({ type: "bigint" })
   public readonly nonce: number;
 
   @Column({ type: "int" })
-  public readonly transactionIndex: number;
+  public transactionIndex: number;
 
   @Column({ type: "varchar", length: 128 })
   public readonly gasLimit: string;
@@ -44,7 +44,7 @@ export class Transaction extends CountableEntity {
   public readonly maxPriorityFeePerGas?: string;
 
   @Column({ type: "bytea", transformer: hexTransformer })
-  public readonly data: string;
+  public data: string;
 
   @Column({ type: "varchar", length: 128 })
   public readonly value: string;
@@ -60,10 +60,10 @@ export class Transaction extends CountableEntity {
   public override readonly blockNumber: number;
 
   @Column({ type: "bytea", transformer: hexTransformer })
-  public readonly blockHash: string;
+  public blockHash: string;
 
   @Column({ type: "int" })
-  public readonly type: number;
+  public type: number;
 
   @Column({ type: "jsonb", nullable: true })
   public readonly accessList?: any;

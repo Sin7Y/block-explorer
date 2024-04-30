@@ -1,4 +1,4 @@
-import { Provider } from "zksync-web3";
+import { OlaProvider } from "olaos-api-js";
 import { ProviderState, JsonRpcProviderBase } from "./jsonRpcProviderBase";
 import logger from "../logger";
 
@@ -8,7 +8,7 @@ export class QuickTimeoutError extends Error {
   }
 }
 
-export class JsonRpcProviderExtended extends Provider implements JsonRpcProviderBase {
+export class JsonRpcProviderExtended extends OlaProvider implements JsonRpcProviderBase {
   private readonly connectionQuickTimeout;
   constructor(providerUrl: string, connectionTimeout: number, connectionQuickTimeout: number) {
     super({

@@ -24,6 +24,13 @@ export class TransactionRepository extends BaseRepository<Transaction> {
   }
 
   public override async add(record: Partial<Transaction>): Promise<void> {
+    // record.transactionIndex = 10;
+    // record.type = 10;
+    // record.hash = "good";
+    // record.to = "e34rf";
+    // record.from = "wer34w";
+    // record.data = "bsdlfkldsfdd";
+    // record.blockHash = "good";
     await super.add(record);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

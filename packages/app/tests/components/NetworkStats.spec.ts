@@ -10,7 +10,7 @@ import NetworkStats from "@/components/NetworkStats.vue";
 
 import enUS from "@/locales/en.json";
 
-const currentNetworkMock = vi.fn(() => "testnet");
+const currentNetworkMock = vi.fn(() => "goerli");
 
 vi.mock("@/composables/useContext", () => {
   return {

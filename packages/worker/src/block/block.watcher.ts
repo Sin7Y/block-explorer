@@ -99,6 +99,7 @@ export class BlockWatcher implements OnModuleInit, OnModuleDestroy {
 
   public async onModuleInit(): Promise<void> {
     this.lastBlockchainBlockNumber = await this.blockchainService.getBlockNumber();
+    // this.lastBlockchainBlockNumber = 0;
 
     this.blockchainBlocksMetric.set(this.lastBlockchainBlockNumber);
     this.logger.debug(`Last block number is set to: ${this.lastBlockchainBlockNumber}`);

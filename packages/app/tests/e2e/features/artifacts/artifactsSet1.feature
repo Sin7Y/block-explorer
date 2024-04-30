@@ -60,6 +60,7 @@ Feature: Main Page
   Examples:
       | Value                       | Dropdown |
       | zkSync Era Sepolia Testnet  | network  |
+      | zkSync Era Goerli Testnet   | network  |
       | Goerli (Stage2)             | network  |
 
   @id254:II @productionEnv
@@ -69,6 +70,7 @@ Feature: Main Page
 
   Examples:
       | Value                      | Dropdown |
+      | zkSync Era Goerli Testnet  | network  |
       | zkSync Era Sepolia Testnet | network  |
 
   Scenario: Network stats is displayed
