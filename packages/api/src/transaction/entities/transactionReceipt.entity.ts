@@ -18,9 +18,9 @@ export class TransactionReceipt extends BaseEntity {
   @Column({ type: "int" })
   public readonly status: number;
 
-  @Column({ type: "varchar", length: 128 })
+  @Column({ type: "varchar", length: 128, nullable: true })
   public readonly gasUsed: string;
 
-  @Column({ type: "varchar", length: 128 })
+  @Column({ type: "varchar", length: 128, nullable: true })
   public readonly cumulativeGasUsed: string;
 }

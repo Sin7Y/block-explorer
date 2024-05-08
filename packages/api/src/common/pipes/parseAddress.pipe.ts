@@ -1,7 +1,7 @@
 import { BadRequestException } from "@nestjs/common";
 import { PipeTransform, Injectable } from "@nestjs/common";
 
-export const ADDRESS_REGEX_PATTERN = "^(0x)?[0-9a-fA-F]{40}$";
+export const ADDRESS_REGEX_PATTERN = "^(0x)?[0-9a-fA-F]{64}$";
 
 interface ParamOptions {
   required?: boolean;

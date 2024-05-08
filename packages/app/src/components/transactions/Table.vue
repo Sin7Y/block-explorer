@@ -196,6 +196,8 @@ import { computed, type PropType, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 
+import OlaIcon from "../icons/OlaIcon.vue";
+
 import AddressLink from "@/components/AddressLink.vue";
 import Badge from "@/components/common/Badge.vue";
 import CopyButton from "@/components/common/CopyButton.vue";
@@ -304,7 +306,7 @@ const transactions = computed<TransactionListItemMapped[] | undefined>(() => {
     fromNetwork: transaction.isL1Originated ? "L1" : "L2",
     toNetwork: "L2", // even withdrawals go through L2 addresses (800A or bridge addresses)
     statusColor: transaction.status === "failed" ? "danger" : "dark-success",
-    statusIcon: ["failed", "included"].includes(transaction.status) ? ZkSyncIcon : EthereumIcon,
+    statusIcon: OlaIcon,
   }));
 });
 

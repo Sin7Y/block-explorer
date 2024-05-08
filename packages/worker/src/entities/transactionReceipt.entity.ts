@@ -57,7 +57,7 @@ export class TransactionReceipt extends CountableEntity {
   @Column({ type: "bigint", transformer: bigIntNumberTransformer })
   public override readonly blockNumber: number;
 
-  @Column({ type: "varchar", length: 128, nullable: true})
+  @Column({ type: "varchar", length: 128, nullable: true })
   public readonly cumulativeGasUsed: string;
 
   @Column({ type: "boolean" })
