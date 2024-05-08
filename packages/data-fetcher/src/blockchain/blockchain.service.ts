@@ -110,10 +110,9 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async getBlock(blockHashOrBlockTag: types.BlockTag): Promise<types.Block> {
-    return await this.genBlock();
-    // return await this.rpcCall(async () => {
-    //   return await this.provider.getBlock(blockHashOrBlockTag);
-    // }, "getBlock");
+    return await this.rpcCall(async () => {
+      return await this.provider.getBlock(blockHashOrBlockTag);
+    }, "getBlock");
   }
 
   public async getBlockNumber(): Promise<number> {
@@ -164,6 +163,9 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async getTransaction(transactionHash: string): Promise<types.TransactionResponse> {
+    if (transactionHash.substring(0, 2) !== "0x") {
+      transactionHash = "0x" + transactionHash;
+    }
     return await this.rpcCall(async () => {
       return await this.provider.getTransaction(transactionHash);
     }, "getTransaction");
@@ -243,6 +245,9 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async getTransactionReceipt(transactionHash: string): Promise<types.TransactionReceipt> {
+    if (transactionHash.substring(0, 2) !== "0x") {
+      transactionHash = "0x" + transactionHash;
+    }
     return await this.rpcCall(async () => {
       return await this.provider.getTransactionReceipt(transactionHash);
     }, "getTransactionReceipt");
