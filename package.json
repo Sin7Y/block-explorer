@@ -23,6 +23,12 @@
     "db:drop": "lerna run db:drop",
     "hyperchain:configure": "ts-node scripts/setup-hyperchain-config"
   },
+  "overrides": {
+    "@ethersproject/abstract-provider": "https://gitpkg.now.sh/ohfp23/ethers.js/packages/abstract-provider?5.7.3",
+    "@ethersproject/address": "https://gitpkg.now.sh/ohfp23/ethers.js/packages/address?5.7.3",
+    "@ethersproject/providers": "https://gitpkg.now.sh/ohfp23/ethers.js/packages/providers?5.7.3",
+    "@ethersproject/signing-key": "https://gitpkg.now.sh/ohfp23/ethers.js/packages/signing-key?5.7.3"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
