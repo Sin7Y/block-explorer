@@ -101,10 +101,9 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async getBlock(blockHashOrBlockTag: types.BlockTag): Promise<types.Block> {
-    return await this.genBlock();
-    // return await this.rpcCall(async () => {
-    //   return await this.provider.getBlock(blockHashOrBlockTag);
-    // }, "getBlock");
+    return await this.rpcCall(async () => {
+      return await this.provider.getBlock(blockHashOrBlockTag);
+    }, "getBlock");
   }
 
   public async getBlockNumber(): Promise<number> {
