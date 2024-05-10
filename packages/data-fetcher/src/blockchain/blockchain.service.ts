@@ -85,30 +85,6 @@ export class BlockchainService implements OnModuleInit {
     }, "getL1BatchDetails");
   }
 
-  private async genBlock(): Promise<types.Block> {
-    return new Promise((resolve, reject) => {
-      // const block: types.Block = mock<types.Block>({ l1BatchNumber: 10, l1BatchTimestamp: 10 });
-      const block = {
-        l1BatchNumber: 10,
-        l1BatchTimestamp: 10,
-        transactions: new Array<string>("9c8a501be105ab9d80da8847a3bb8818e896e06715170b108ff650a06699c3a7"),
-        hash: "good",
-        parentHash: "",
-        number: 16,
-        timestamp: 1,
-        nonce: "",
-        difficulty: 1,
-        _difficulty: BigNumber.from(1),
-        gasLimit: BigNumber.from(2),
-        gasUsed: BigNumber.from(3),
-        miner: "9c8a501be105ab9d80da8847a3bb8818e896e06715170b108ff650a06699c3a7",
-        extraData: "9c8a501be105ab9d80da8847a3bb8818e896e06715170b108ff650a06699c3a7",
-        baseFeePerGas: BigNumber.from(0),
-      };
-      resolve(block);
-    });
-  }
-
   public async getBlock(blockHashOrBlockTag: types.BlockTag): Promise<types.Block> {
     return await this.rpcCall(async () => {
       return await this.provider.getBlock(blockHashOrBlockTag);
@@ -127,41 +103,6 @@ export class BlockchainService implements OnModuleInit {
     }, "getBlockDetails");
   }
 
-  private async genTransaction(): Promise<types.TransactionResponse> {
-    return new Promise((resolve, reject) => {
-      const transactionReceiptPromise = this.genTransactionReceipt();
-      const waitFinalize = async (): Promise<types.TransactionReceipt> => {
-        return transactionReceiptPromise;
-      };
-      const wait = (confirmations?: number): Promise<types.TransactionReceipt> => {
-        return transactionReceiptPromise;
-      };
-      const transaction = {
-        l1BatchNumber: 0,
-        l1BatchTxIndex: 0,
-        waitFinalize: waitFinalize,
-        hash: "good",
-        blockNumber: 16,
-        blockHash: "good",
-        timestamp: 0,
-        confirmations: 0,
-        // Not optional (as it is in Transaction)
-        from: "",
-        // The raw transaction
-        raw: "",
-        // This function waits until the transaction has been mined
-        wait: wait,
-        gasLimit: BigNumber.from(0),
-        gasPrice: BigNumber.from(0),
-        nonce: 0,
-        data: "",
-        value: BigNumber.from(0),
-        chainId: 0,
-      };
-      resolve(transaction);
-    });
-  }
-
   public async getTransaction(transactionHash: string): Promise<types.TransactionResponse> {
     if (transactionHash.substring(0, 2) !== "0x") {
       transactionHash = "0x" + transactionHash;
@@ -170,78 +111,11 @@ export class BlockchainService implements OnModuleInit {
       return await this.provider.getTransaction(transactionHash);
     }, "getTransaction");
   }
-  private genTransactionDetails(): Promise<types.TransactionDetails> {
-    return new Promise((resolve, reject) => {
-      const transactionDetail = {
-        isL1Originated: false,
-        status: "",
-        fee: "",
-        initiatorAddress: "",
-        receivedAt: new Date(),
-      };
-      resolve(transactionDetail);
-    });
-  }
 
   public async getTransactionDetails(transactionHash: string): Promise<types.TransactionDetails> {
     return await this.rpcCall(async () => {
       return await this.provider.getTransactionDetails(transactionHash);
     }, "getTransactionDetails");
-  }
-
-  private async genTransactionReceipt(): Promise<types.TransactionReceipt> {
-    return new Promise((resolve, reject) => {
-      // const block: types.Block = mock<types.Block>({ l1BatchNumber: 10, l1BatchTimestamp: 10 });
-      const log = {
-        l1BatchNumber: 16,
-        blockNumber: 16,
-        blockHash: "good",
-        transactionIndex: 10,
-        removed: false,
-        address: "us",
-        data: "data",
-        topics: new Array<string>(""),
-        transactionHash: "good",
-        logIndex: 10,
-      };
-      const l2ToL1Log = {
-        blockNumber: 16,
-        blockHash: "good",
-        l1BatchNumber: 0,
-        transactionIndex: 10,
-        txIndexInL1Batch: 10,
-        shardId: 10,
-        isService: false,
-        sender: "us",
-        key: "us",
-        value: "us",
-        transactionHash: "good",
-        logIndex: 10,
-      };
-      const transactionReceipt = {
-        l1BatchNumber: 10,
-        l1BatchTxIndex: 10,
-        logs: new Array<types.Log>(log),
-        l2ToL1Logs: new Array<L2ToL1Log>(l2ToL1Log),
-        to: "sfdsdf",
-        from: "gsdfs",
-        contractAddress: "gsdfs",
-        transactionIndex: 10,
-        root: "gfds",
-        gasUsed: BigNumber.from(0),
-        logsBloom: "sdfsdf",
-        blockHash: "good",
-        transactionHash: "good",
-        blockNumber: 16,
-        confirmations: 3,
-        cumulativeGasUsed: BigNumber.from(45),
-        effectiveGasPrice: BigNumber.from(75),
-        byzantium: false,
-        type: 54,
-        status: 5,
-      };
-      resolve(transactionReceipt);
-    });
   }
 
   public async getTransactionReceipt(transactionHash: string): Promise<types.TransactionReceipt> {
@@ -269,19 +143,6 @@ export class BlockchainService implements OnModuleInit {
     return await this.rpcCall(async () => {
       return await this.provider.getDefaultBridgeAddresses();
     }, "getDefaultBridgeAddresses");
-  }
-
-  private async genDebugTraceTransaction(): Promise<TraceTransactionResult> {
-    return new Promise((resolve, reject) => {
-      const traceTransactionResult = {
-        type: "",
-        from: "",
-        to: "",
-        error: "",
-        revertReason: "",
-      };
-      resolve(traceTransactionResult);
-    });
   }
 
   public async debugTraceTransaction(txHash: string, onlyTopCall = false): Promise<TraceTransactionResult> {
