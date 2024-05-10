@@ -4,13 +4,18 @@
     <div class="container-app">
       <IndexerDelayAlert v-if="!currentNetwork.maintenance && currentNetwork.name === 'mainnet'" />
       <MaintenanceView v-if="currentNetwork.maintenance" />
-      <router-view v-else />
+      <div v-else class="translate-y-[-320px]">
+        <router-view />
+      </div>
     </div>
     <the-footer />
   </template>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+
 import { useTitle } from "@vueuse/core";
 
 import IndexerDelayAlert from "@/components/IndexerDelayAlert.vue";
@@ -25,9 +30,12 @@ import MaintenanceView from "@/views/MaintenanceView.vue";
 
 const { setup } = useLocalization();
 const { title } = useRouteTitle();
+const route = useRoute();
 
 useTitle(title);
 const { isReady, currentNetwork } = useContext();
+
+const isIndex = computed(() => route.name === "home");
 
 setup();
 </script>

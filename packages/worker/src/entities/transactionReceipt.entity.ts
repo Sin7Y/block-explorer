@@ -37,10 +37,10 @@ export class TransactionReceipt extends CountableEntity {
   @Column({ type: "bytea", transformer: hexTransformer })
   public readonly root: string;
 
-  @Column({ type: "varchar", length: 128 })
+  @Column({ type: "varchar", length: 128, nullable: true })
   public readonly gasUsed: string;
 
-  @Column({ type: "varchar", length: 128 })
+  @Column({ type: "varchar", length: 128, nullable: true })
   public readonly effectiveGasPrice: string;
 
   @Column({ type: "bytea", transformer: hexTransformer })
@@ -57,7 +57,7 @@ export class TransactionReceipt extends CountableEntity {
   @Column({ type: "bigint", transformer: bigIntNumberTransformer })
   public override readonly blockNumber: number;
 
-  @Column({ type: "varchar", length: 128 })
+  @Column({ type: "varchar", length: 128, nullable: true })
   public readonly cumulativeGasUsed: string;
 
   @Column({ type: "boolean" })

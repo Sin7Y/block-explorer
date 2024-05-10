@@ -9,6 +9,7 @@ import { setTimeout } from "timers/promises";
 import { JsonRpcProviderBase } from "../rpcProvider";
 import { BLOCKCHAIN_RPC_CALL_DURATION_METRIC_NAME, BlockchainRpcCallMetricLabel } from "../metrics";
 import { RetryableContract } from "./retryableContract";
+import { L2ToL1Log } from "zksync-web3/build/src/types";
 
 export interface BridgeAddresses {
   l1Erc20DefaultBridge: string;
@@ -173,13 +174,13 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async onModuleInit(): Promise<void> {
-    const bridgeAddresses = await this.getDefaultBridgeAddresses();
-
-    this.bridgeAddresses = {
-      l1Erc20DefaultBridge: bridgeAddresses.erc20L1.toLowerCase(),
-      l2Erc20DefaultBridge: bridgeAddresses.erc20L2.toLowerCase(),
-    };
-
-    this.logger.debug(`L2 ERC20 Bridge is set to: ${this.bridgeAddresses.l2Erc20DefaultBridge}`);
+    // const bridgeAddresses = await this.getDefaultBridgeAddresses();
+    //
+    // this.bridgeAddresses = {
+    //   l1Erc20DefaultBridge: bridgeAddresses.erc20L1.toLowerCase(),
+    //   l2Erc20DefaultBridge: bridgeAddresses.erc20L2.toLowerCase(),
+    // };
+    //
+    // this.logger.debug(`L2 ERC20 Bridge is set to: ${this.bridgeAddresses.l2Erc20DefaultBridge}`);
   }
 }

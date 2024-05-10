@@ -70,12 +70,12 @@ export class BlockService {
       );
 
       if (block.transactions.length === 0) {
-        blockLogs = await this.blockchainService.getLogs({
-          fromBlock: blockNumber,
-          toBlock: blockNumber,
-        });
-
-        blockLogData = await this.logService.getData(blockLogs, blockDetails);
+        // blockLogs = await this.blockchainService.getLogs({
+        //   fromBlock: blockNumber,
+        //   toBlock: blockNumber,
+        // });
+        //
+        // blockLogData = await this.logService.getData(blockLogs, blockDetails);
       }
 
       const stopBalancesDurationMeasuring = this.balancesProcessingDurationMetric.startTimer();

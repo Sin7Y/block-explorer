@@ -84,14 +84,14 @@ getBatches(1, new Date());
   @apply mt-4;
 
   .title {
-    @apply text-4xl font-bold text-white;
+    @apply text-4xl font-bold text-black;
   }
   .subtitle {
-    @apply mt-2 text-base text-white sm:text-2xl;
+    @apply mt-2 text-base text-black sm:text-2xl;
   }
 
   .section {
-    @apply block justify-between gap-x-4 pt-9 lg:pt-14;
+    @apply block justify-between gap-x-4 pt-6 lg:pt-8;
     .network-stats {
       @apply mb-5 lg:mb-0;
     }

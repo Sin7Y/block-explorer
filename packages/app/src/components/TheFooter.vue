@@ -24,15 +24,15 @@ const config = useRuntimeConfig();
 const navigation = reactive([
   {
     label: computed(() => t("footer.nav.docs")),
-    url: "https://docs.zksync.io/build/tooling/block-explorer/getting-started.html",
+    url: "https://ola-2.gitbook.io/ola-developer-documents",
   },
-  {
-    label: computed(() => t("footer.nav.terms")),
-    url: "https://zksync.io/terms",
-  },
+  // {
+  //   label: computed(() => t("footer.nav.terms")),
+  //   url: "https://zksync.io/terms",
+  // },
   {
     label: computed(() => t("footer.nav.contact")),
-    url: "https://zksync.io/contact",
+    url: "https://discord.gg/Bk3dNHWt2n",
   },
 ]);
 </script>

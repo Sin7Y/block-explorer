@@ -5,7 +5,7 @@
         <div class="logo-container">
           <router-link :to="{ name: 'home' }">
             <span class="sr-only">zkSync</span>
-            <zk-sync-era />
+            <ola-icon />
           </router-link>
         </div>
         <div class="burger-button-container">
@@ -30,7 +30,7 @@
         </PopoverGroup>
         <div class="header-right-side">
           <NetworkSwitch />
-          <LocaleSwitch
+          <!-- <LocaleSwitch
             :value="(locale as string)"
             @update:value="changeLanguage"
             :options="
@@ -39,7 +39,7 @@
                 label: t(`locale.${value}`),
               }))
             "
-          />
+          /> -->
           <div class="socials-container">
             <a :href="social.url" target="_blank" rel="noopener" v-for="(social, index) in socials" :key="index">
               <component :is="social.component" />
@@ -52,9 +52,7 @@
       v-if="hasContent"
       class="hero-banner-container"
       :class="[`${currentNetwork.name}`, { 'home-banner': route.path === '/' }]"
-    >
-      <hero-arrows class="hero-image" />
-    </div>
+    />
     <transition
       enter-active-class="duration-200 ease-out"
       enter-from-class="scale-95 opacity-0"
@@ -68,7 +66,8 @@
           <div class="mobile-header-container">
             <div class="mobile-popover-navigation">
               <div class="popover-zksync-logo">
-                <zk-sync class="logo" />
+                <!-- <zk-sync class="logo" /> -->
+                <ola-icon class="logo" />
               </div>
               <div class="-mr-2">
                 <PopoverButton class="close-popover-button">
@@ -104,8 +103,9 @@
               </nav>
             </div>
             <div class="mobile-network-switch-container">
-              <NetworkSwitch />
-              <LocaleSwitch
+              <!-- now we have only one network -->
+              <!-- <NetworkSwitch /> -->
+              <!-- <LocaleSwitch
                 :value="(locale as string)"
                 @update:value="changeLanguage"
                 :options="
@@ -114,7 +114,7 @@
                     label: t(`locale.${value}`),
                   }))
                 "
-              />
+              /> -->
             </div>
             <div class="mobile-socials-container">
               <a :href="social.url" target="_blank" rel="noopener" v-for="(social, index) in socials" :key="index">
@@ -138,14 +138,12 @@ import { MenuIcon, XIcon } from "@heroicons/vue/outline";
 
 import LinksMobilePopover from "./LinksMobilePopover.vue";
 import LinksPopover from "./LinksPopover.vue";
+import TelegramIcon from "../icons/TelegramIcon.vue";
 
-import LocaleSwitch from "@/components/LocaleSwitch.vue";
 import NetworkSwitch from "@/components/NetworkSwitch.vue";
 import DiscordIcon from "@/components/icons/DiscordIcon.vue";
-import HeroArrows from "@/components/icons/HeroArrows.vue";
+import OlaIcon from "@/components/icons/OlaLogo.vue";
 import TwitterIcon from "@/components/icons/TwitterIcon.vue";
-import ZkSync from "@/components/icons/ZkSync.vue";
-import ZkSyncEra from "@/components/icons/ZkSyncEra.vue";
 
 import useContext from "@/composables/useContext";
 import useLocalization from "@/composables/useLocalization";
@@ -159,7 +157,7 @@ const { currentNetwork } = useContext();
 const navigation = reactive([
   {
     label: computed(() => t("header.nav.documentation")),
-    url: "https://docs.zksync.io/build/tooling/block-explorer/getting-started.html",
+    url: "https://ola-2.gitbook.io/ola-developer-documents",
   },
 ]);
 
@@ -193,18 +191,21 @@ const links = [
   },
 ];
 
-if (currentNetwork.value.bridgeUrl) {
-  links.push({
-    label: computed(() => t("header.nav.bridge")),
-    url: computed(() => currentNetwork.value.bridgeUrl!),
-  });
-}
+// if (currentNetwork.value.bridgeUrl) {
+//   links.push({
+//     label: computed(() => t("header.nav.bridge")),
+//     url: computed(() => currentNetwork.value.bridgeUrl!),
+//   });
+// }
 
 const toolsLinks = reactive(links);
-
 const socials = [
-  { url: "https://join.zksync.dev/", component: DiscordIcon },
-  { url: "https://twitter.com/zksync", component: TwitterIcon },
+  { url: "https://discord.gg/Bk3dNHWt2n", component: DiscordIcon },
+  { url: "https://twitter.com/ola_zkzkvm", component: TwitterIcon },
+  {
+    url: "https://t.me/sin7y_labs",
+    component: TelegramIcon,
+  },
 ];
 
 const hasContent = computed(() => {
@@ -226,12 +227,12 @@ const hasContent = computed(() => {
 
 <style lang="scss">
 .header-popover-container {
-  @apply relative bg-primary-900;
+  @apply flex flex-col bg-[url('/images/header-bg.png')] bg-cover h-[380px];
   .header-wrap {
     @apply container z-50;
   }
   .header-container {
-    @apply flex items-center justify-between border-b border-neutral-500 py-4 md:space-x-10 lg:justify-start;
+    @apply flex items-center justify-between py-4 md:space-x-10 lg:justify-start;
   }
   .logo-container {
     @apply flex justify-start;
@@ -251,7 +252,7 @@ const hasContent = computed(() => {
       .navigation-link {
         @apply flex items-center;
         &.active {
-          @apply bg-primary-800;
+          // @apply border-b;
 
           .dropdown-icon {
             @apply -rotate-180;
@@ -274,7 +275,7 @@ const hasContent = computed(() => {
       }
     }
     .navigation-link {
-      @apply rounded-md py-2.5 text-base font-medium text-white no-underline hover:bg-primary-800 md:px-3.5;
+      @apply rounded-md py-2.5 text-base font-medium text-black no-underline md:px-3.5;
     }
 
     .router-link-exact-active {
@@ -294,19 +295,19 @@ const hasContent = computed(() => {
       @apply flex items-center justify-end;
 
       a {
-        @apply ml-4 first:ml-0;
+        @apply ml-4 first:ml-0 text-black;
       }
     }
   }
   .hero-banner-container {
-    @apply absolute left-0 top-full flex h-64 w-full items-end justify-end overflow-hidden bg-primary-900;
+    @apply flex h-64 w-full items-end justify-end overflow-hidden bg-cover;
 
     .hero-image {
       @apply h-5/6 w-auto;
     }
   }
   .home-banner {
-    @apply h-80;
+    // @apply -mb-70;
   }
 }
 .header-mobile-popover {

@@ -31,18 +31,23 @@
     font-weight: normal;
   }
 
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-Regular.ttf") format("truetype");
+  }
+
   h1 {
-    @apply text-4xl font-bold text-neutral-50;
+    @apply text-4xl font-bold;
   }
   h2 {
-    @apply text-3xl font-bold text-neutral-50;
+    @apply text-3xl font-bold ;
   }
   h3 {
-    @apply text-2xl font-bold text-neutral-50;
+    @apply text-2xl font-bold;
   }
 
   body {
-    @apply min-h-screen bg-neutral-50 font-sans text-base text-neutral-700;
+    @apply min-h-screen bg-neutral-50 font-sans text-base text-black;
   }
 
   #app {
@@ -50,6 +55,6 @@
   }
 
   a {
-    @apply text-primary-600 underline hover:text-[#7379E5];
+    @apply text-black hover:underline hover:font-bold;
   }
 }

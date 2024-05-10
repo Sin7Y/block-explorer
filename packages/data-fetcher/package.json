@@ -30,7 +30,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/terminus": "^9.1.2",
     "@willsoto/nestjs-prometheus": "^4.7.0",
-    "ethers": "^5.7.1",
+    "ethers": "5.7.0",
     "nest-winston": "^1.7.0",
     "prom-client": "^14.1.0",
     "reflect-metadata": "^0.1.13",

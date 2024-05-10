@@ -1,5 +1,5 @@
 import { Injectable, OnModuleInit, Logger } from "@nestjs/common";
-import { BigNumber } from "ethers";
+import { BigNumber, BigNumberish, providers } from "ethers";
 import { utils, types } from "zksync-web3";
 import { Histogram } from "prom-client";
 import { InjectMetric } from "@willsoto/nestjs-prometheus";
@@ -9,6 +9,8 @@ import { setTimeout } from "timers/promises";
 import { JsonRpcProviderBase } from "../rpcProvider";
 import { BLOCKCHAIN_RPC_CALL_DURATION_METRIC_NAME, BlockchainRpcCallMetricLabel } from "../metrics";
 import { RetryableContract } from "./retryableContract";
+import { Address, L2ToL1Log } from "zksync-web3/src/types";
+import { TransactionReceipt } from "@ethersproject/abstract-provider/src.ts";
 
 export interface BridgeAddresses {
   l1Erc20DefaultBridge: string;
@@ -51,7 +53,7 @@ export class BlockchainService implements OnModuleInit {
       stopDurationMeasuring({ function: functionName });
       return result;
     } catch (error) {
-      this.logger.error({ message: error.message, code: error.code }, error.stack);
+      this.logger.error({ message: error.message, function: functionName, code: error.code }, error.stack);
       const retryTimeout = this.errorCodesForQuickRetry.includes(error.code)
         ? this.rpcCallsQuickRetryTimeout
         : this.rpcCallsDefaultRetryTimeout;
@@ -102,6 +104,9 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async getTransaction(transactionHash: string): Promise<types.TransactionResponse> {
+    if (transactionHash.substring(0, 2) !== "0x") {
+      transactionHash = "0x" + transactionHash;
+    }
     return await this.rpcCall(async () => {
       return await this.provider.getTransaction(transactionHash);
     }, "getTransaction");
@@ -114,6 +119,9 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async getTransactionReceipt(transactionHash: string): Promise<types.TransactionReceipt> {
+    if (transactionHash.substring(0, 2) !== "0x") {
+      transactionHash = "0x" + transactionHash;
+    }
     return await this.rpcCall(async () => {
       return await this.provider.getTransactionReceipt(transactionHash);
     }, "getTransactionReceipt");
@@ -181,13 +189,13 @@ export class BlockchainService implements OnModuleInit {
   }
 
   public async onModuleInit(): Promise<void> {
-    const bridgeAddresses = await this.getDefaultBridgeAddresses();
-
-    this.bridgeAddresses = {
-      l1Erc20DefaultBridge: bridgeAddresses.erc20L1.toLowerCase(),
-      l2Erc20DefaultBridge: bridgeAddresses.erc20L2.toLowerCase(),
-    };
-
-    this.logger.debug(`L2 ERC20 Bridge is set to: ${this.bridgeAddresses.l2Erc20DefaultBridge}`);
+    // const bridgeAddresses = await this.getDefaultBridgeAddresses();
+    //
+    // this.bridgeAddresses = {
+    //   l1Erc20DefaultBridge: bridgeAddresses.erc20L1.toLowerCase(),
+    //   l2Erc20DefaultBridge: bridgeAddresses.erc20L2.toLowerCase(),
+    // };
+    //
+    // this.logger.debug(`L2 ERC20 Bridge is set to: ${this.bridgeAddresses.l2Erc20DefaultBridge}`);
   }
 }

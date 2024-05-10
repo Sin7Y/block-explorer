@@ -52,6 +52,8 @@
 <script lang="ts" setup>
 import { useI18n } from "vue-i18n";
 
+import OlaIcon from "../icons/OlaIcon.vue";
+
 import Badge from "@/components/common/Badge.vue";
 import CopyButton from "@/components/common/CopyButton.vue";
 import ContentLoader from "@/components/common/loaders/ContentLoader.vue";
@@ -89,10 +91,7 @@ defineProps({
 });
 
 function getBadgeIconByStatus(status: BatchListItem["status"]) {
-  if (status === "sealed") {
-    return ZkSyncIcon;
-  }
-  return EthereumIcon;
+  return OlaIcon;
 }
 </script>
 

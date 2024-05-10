@@ -59,7 +59,7 @@ export class Transaction extends BaseEntity {
   @Column({ type: "varchar", length: 128 })
   public readonly gasLimit: string;
 
-  @Column({ type: "varchar", length: 128 })
+  @Column({ type: "varchar", length: 128, nullable: true })
   public readonly gasPrice: string;
 
   @Column({ type: "varchar", length: 128, nullable: true, transformer: hexToDecimalNumberTransformer })
