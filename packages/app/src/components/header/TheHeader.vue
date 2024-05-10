@@ -157,7 +157,7 @@ const { currentNetwork } = useContext();
 const navigation = reactive([
   {
     label: computed(() => t("header.nav.documentation")),
-    url: "https://docs.zksync.io/build/tooling/block-explorer/getting-started.html",
+    url: "https://ola-2.gitbook.io/ola-developer-documents",
   },
 ]);
 
@@ -191,12 +191,12 @@ const links = [
   },
 ];
 
-if (currentNetwork.value.bridgeUrl) {
-  links.push({
-    label: computed(() => t("header.nav.bridge")),
-    url: computed(() => currentNetwork.value.bridgeUrl!),
-  });
-}
+// if (currentNetwork.value.bridgeUrl) {
+//   links.push({
+//     label: computed(() => t("header.nav.bridge")),
+//     url: computed(() => currentNetwork.value.bridgeUrl!),
+//   });
+// }
 
 const toolsLinks = reactive(links);
 const socials = [
